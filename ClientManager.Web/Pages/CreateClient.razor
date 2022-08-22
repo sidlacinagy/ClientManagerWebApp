@@ -1,0 +1,42 @@
+﻿@inherits CreateClientBase
+@using ClientManager.Shared.Enums;
+
+<EditForm Model=@ClientDto OnValidSubmit="@OnCreateClick">
+    <div class="d-flex justify-content-center flex-wrap">
+            <div class="m-3" style="min-width:20%">
+                <label for="IdNumber" class="form-label">Identification number</label>
+                <input id="IdNumber" class="form-control" required @bind="ClientDto.IdNumber"></input>
+            </div>
+            <div class="m-3" style="min-width:20%">
+                <label for="Address" class="form-label">Address</label>
+                <input id="Address" class="form-control" required @bind="ClientDto.Address"></input>
+            </div>
+            <div class="m-3" style="min-width:20%">
+                <label for="FirstName" class="form-label">First name</label>
+                <input id="FirstName" class="form-control" @bind="ClientDto.FirstName"/>
+            </div>
+            <div class="m-3" style="min-width:20%">
+                <label for="LastName" class="form-label">Last name</label>
+                <input id="LastName" class="form-control" @bind="ClientDto.LastName"/>
+            </div>
+            <div class="m-3" style="min-width:20%">
+                <label for="PhoneNumber" class="form-label">Phone number</label>
+                <input id="PhoneNumber" class="form-control" required @bind="ClientDto.PhoneNumber"/>
+            </div>
+            <div class="m-3" style="min-width:20%">
+                <label for="ClientType" class="form-label">Client type</label>
+                <InputSelect id="ClientType" class="form-control" required @bind-Value="ClientDto.ClientType">
+                @foreach(ClientTypes ClientType in (Enum.GetValues(typeof(ClientTypes))))
+                {     
+                    <option value="@ClientType">@ClientType</option>  
+                }
+                </InputSelect>
+            </div>
+            </div>
+            <div class="m-3 row justify-content-center">
+                <button class="btn btn-primary" style="width:15%" type="submit">Create</button>
+            </div>
+        </EditForm>
+@code {
+
+}

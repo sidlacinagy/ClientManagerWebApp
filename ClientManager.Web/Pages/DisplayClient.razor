@@ -1,0 +1,54 @@
+﻿@inherits DisplayClientBase
+@using ClientManager.Shared.Enums;
+<div class="row mt-1 justify-content-center align-items-center">
+    @if(IsEditMode)
+    {
+    <div class="col-10">
+        <EditForm Model=@UpdatedClientDto OnValidSubmit="@OnUpdateClick" class="justify-content-center align-items-center row">
+            <div class="col-2">@ClientDto.IdNumber</div>
+            <div class="col-2"><input class="form-control" required @bind="UpdatedClientDto.Address"></input></div>
+            <div class="col-2"><input class="form-control" @bind="UpdatedClientDto.FirstName"/></div>
+            <div class="col-2"><input class="form-control" @bind="UpdatedClientDto.LastName"/></div>
+            <div class="col-2"><input class="form-control" required @bind="UpdatedClientDto.PhoneNumber"/></div>
+            <div class="col-1">
+                <InputSelect class="form-control text-center" required @bind-Value="UpdatedClientDto.ClientType">
+                @foreach(ClientTypes ClientType in (Enum.GetValues(typeof(ClientTypes))))
+                {     
+                    <option value="@ClientType">@ClientType</option>  
+                }
+                </InputSelect>
+            </div>
+            <div class="col-1">
+                <button class="btn btn-primary">Update</button>
+            </div>
+        </EditForm>
+    </div>
+    }
+    else
+    {
+    <div class="col-10">
+        <div class="justify-content-center align-items-center row">
+            <div class="col-2">@ClientDto.IdNumber</div>
+            <div class="col-2">@ClientDto.Address</div>
+            <div class="col-2">@ClientDto.FirstName</div>
+            <div class="col-2">@ClientDto.LastName</div>
+            <div class="col-2">@ClientDto.PhoneNumber</div>
+            <div class="col-1">@ClientDto.ClientType</div>
+            <div class="col-1"></div>
+        </div>
+    </div>
+    }
+    <div class="col-1 justify-content-center align-items-center text-center">
+        <button class="btn btn-secondary" @onclick="@(e => IsEditMode=!IsEditMode)">Toggle edit</button>
+    </div>
+    <div class="col-1 justify-content-center align-items-center text-center">
+        <button class="btn btn-danger" @onclick="@(e => OnDeleteClick())">
+            Delete
+        </button>
+    </div>
+</div>
+
+
+@code {
+
+}

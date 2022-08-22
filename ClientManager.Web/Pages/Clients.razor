@@ -1,0 +1,79 @@
+﻿@page "/"
+@inherits ClientsBase
+
+@if(IsErrorMsgShown)
+{
+    <h3 class="text-center" style="color:red;">@ErrorMessage</h3>
+}
+@if(IsSuccessMsgShown)
+{
+    <h3 class="text-center" style="color:green;">@SuccessMessage</h3>
+}
+<div class="mb-5">
+<CreateClient OnClientCreated="ClientCreated"></CreateClient>
+</div>
+<div class="mb-5">
+<SearchClient OnSearchRequested="SearchClient" OnSearchReset="ResetSearch"></SearchClient>
+</div>
+@if (null==Clients)
+{
+    <h4>Loading...</h4>
+}
+else if (Clients.Count() == 0)
+{
+    <h4>No clients found</h4>
+}
+else
+{
+    <div class="row mb-4 h4">
+        <div class="col-10">
+            <div class="justify-content-start align-items-center row">
+                <div class="col-2">
+                    <div class="row justify-content-start align-items-center">  
+                        <div class="col-2 col-md-3">Id</div>
+                        <div class="col-10 col-md-9">
+                            <div class="d-flex">
+                            <div class="me-3 hoverpointer" @onclick="@(e => OrderClients((x=>x.IdNumber),true))"><i class="fa-solid fa-arrow-down-a-z"></i></div>
+                            <div class="me-3 hoverpointer" @onclick="@(e => OrderClients((x=>x.IdNumber),false))"><i class="fa-solid fa-arrow-down-z-a"></i></div>
+                            </div>
+                        </div>                   
+                    </div>
+                </div>
+                <div class="col-2">Address</div>
+                <div class="col-2">
+                    <div class="row justify-content-start align-items-center">  
+                        <div class="col-4">First Name</div>
+                        <div class="col-8">
+                            <div class="d-flex">
+                            <div class="me-3 hoverpointer" @onclick="@(e => OrderClients((x=>x.FirstName),true))"><i class="fa-solid fa-arrow-down-a-z"></i></div>
+                            <div class="me-3 hoverpointer" @onclick="@(e => OrderClients((x=>x.FirstName),false))"><i class="fa-solid fa-arrow-down-z-a"></i></div>
+                            </div>
+                        </div>                   
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="row justify-content-start align-items-center">  
+                        <div class="col-4">Last Name</div>
+                        <div class="col-8">
+                            <div class="d-flex">
+                            <div class="me-3 hoverpointer" @onclick="@(e => OrderClients((x=>x.LastName),true))"><i class="fa-solid fa-arrow-down-a-z"></i></div>
+                            <div class="me-3 hoverpointer" @onclick="@(e => OrderClients((x=>x.LastName),false))"><i class="fa-solid fa-arrow-down-z-a"></i></div>
+                            </div>
+                        </div>                   
+                    </div>
+                </div>
+                <div class="col-2">Phone number</div>
+                <div class="col-1">Client type</div>
+                <div class="col-1"></div>
+            </div>
+        </div>
+    </div>
+    
+    @foreach(var client in Clients)
+        {
+            <DisplayClient ClientDtoParam="client" OnClientDeleted="ClientDeleted" OnClientUpdated="ClientUpdated"></DisplayClient>
+        }
+}
+@code {
+
+}

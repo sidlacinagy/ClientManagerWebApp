@@ -1,0 +1,38 @@
+﻿@inherits SearchClientBase
+@using ClientManager.Shared.Dtos;
+@using ClientManager.Shared.Enums;
+
+        <EditForm Model=@SearchFilterDto OnValidSubmit="@OnSearchRequestClick" class="justify-content-center align-items-end row">
+            <div class="col-2">
+                <label for="IdNumber" class="form-label">Identification number</label>
+                <input id="IdNumber" class="form-control"  @bind="SearchFilterDto.IdNumber"></input>
+            </div>
+            <div class="col-3">
+                <label for="FirstName" class="form-label">First name</label>
+                <input id="FirstName" class="form-control"  @bind="SearchFilterDto.FirstName"></input>
+            </div>
+            <div class="col-3">
+                <label for="LastName" class="form-label">Last name</label>
+                <input id="LastName" class="form-control" @bind="SearchFilterDto.LastName"/>
+            </div>
+            <div class="col-2">
+                <label for="ClientType" class="form-label">Client type</label>
+                <InputSelect id="ClientType" class="form-control" @bind-Value="SearchFilterDto.ClientType">
+                <option value="">No filter</option>
+                @foreach(ClientTypes ClientType in (Enum.GetValues(typeof(ClientTypes))))
+                {     
+                    <option value="@ClientType">@ClientType</option>  
+                }
+                </InputSelect>
+            </div>
+            <div class="col-1">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+             <div class="col-1">
+                <button class="btn btn-secondary" @onclick="@(e => OnSearchResetClick())">Reset filter</button>
+            </div>
+        </EditForm>
+
+@code {
+
+}
